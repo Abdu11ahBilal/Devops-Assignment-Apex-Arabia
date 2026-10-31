@@ -18,6 +18,9 @@ digest="$(docker image inspect --format '{{index .RepoDigests 0}}' "$ref")"
 
 echo "==> Deploying $LABEL ($digest)"
 docker compose up --detach --wait db
+# Schema and app-role grants are applied by the admin role (idempotent); the API's role can't run DDL.
+docker compose exec -T db sh -c 'psql -q -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
+  -f /docker-entrypoint-initdb.d/01-schema.sql && sh /docker-entrypoint-initdb.d/02-app-role.sh'
 API_IMAGE="$digest" docker compose up --detach --no-deps --no-build api
 
 echo "==> Waiting for /ready on port $PORT"

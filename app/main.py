@@ -24,11 +24,8 @@ QUIET_PATHS = {"/health", "/ready", "/metrics"}  # probed every few seconds
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
-    try:
-        database.init_schema()
-    except Exception:
-        # Stay alive so /health answers and /ready reports the problem instead of crash-looping.
-        log.exception("database schema initialisation failed")
+    # No DB work at startup: if PostgreSQL is unreachable the API stays alive, /health
+    # answers and /ready reports the problem instead of crash-looping.
     log.info("api started", extra={"version": VERSION})
     yield
 
@@ -66,7 +63,7 @@ def health():
 
 @app.get("/ready")
 def ready():
-    """Readiness: the API can serve traffic, i.e. PostgreSQL is reachable."""
+    """Readiness: PostgreSQL is reachable and the tasks table is readable."""
     try:
         database.ping()
     except Exception as exc:

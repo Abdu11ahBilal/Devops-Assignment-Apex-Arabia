@@ -1,32 +1,23 @@
-"""PostgreSQL access. Every query is parameterised; connections are short-lived."""
+"""PostgreSQL access. Every query is parameterised; connections are short-lived.
+
+The schema lives in db/01-schema.sql and is applied by the admin role, so the API's own
+role (db/02-app-role.sh) only needs SELECT and INSERT on tasks.
+"""
 
 import os
 
 import psycopg
 from psycopg.rows import dict_row
 
-SCHEMA = """
-CREATE TABLE IF NOT EXISTS tasks (
-    id         SERIAL PRIMARY KEY,
-    title      TEXT        NOT NULL,
-    done       BOOLEAN     NOT NULL DEFAULT FALSE,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
-)
-"""
-
 
 def connect() -> psycopg.Connection:
     return psycopg.connect(os.environ["DATABASE_URL"], connect_timeout=3, row_factory=dict_row)
 
 
-def init_schema() -> None:
-    with connect() as conn:
-        conn.execute(SCHEMA)
-
-
 def ping() -> None:
+    # Proves connectivity, schema and grants in one cheap query.
     with connect() as conn:
-        conn.execute("SELECT 1")
+        conn.execute("SELECT 1 FROM tasks LIMIT 1")
 
 
 def create_task(title: str) -> dict:

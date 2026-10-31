@@ -2,15 +2,20 @@ name: apex-tasks
 
 services:
   db:
-    image: postgres:17-alpine
+    image: postgres:17-alpine@sha256:18cfe3ef5e6815560c98237d6216d1e5119702fb0f3894c8785dd58b8bbe5d73
     environment:
       POSTGRES_DB: ${POSTGRES_DB:?set in .env}
-      POSTGRES_USER: ${POSTGRES_USER:?set in .env}
+      POSTGRES_USER: ${POSTGRES_USER:?set in .env}           # admin: owns the schema
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set in .env}
+      APP_DB_USER: ${APP_DB_USER:?set in .env}               # restricted role the API uses
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?set in .env}
     volumes:
-      - pgdata:/var/lib/postgresql/data   # named volume: survives deploys and rollbacks
+      - pgdata:/var/lib/postgresql/data       # named volume: survives deploys and rollbacks
+      - ./db:/docker-entrypoint-initdb.d:ro   # schema + app role on first start; deploy.sh re-applies
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      # -h 127.0.0.1: the temporary server used during first-start init listens on the socket only,
+      # so this stays unhealthy until init scripts have finished.
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s
       timeout: 3s
       retries: 10
@@ -21,7 +26,7 @@ services:
     image: ${API_IMAGE:-apex-task-api:local}
     build: .
     environment:
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      DATABASE_URL: postgresql://${APP_DB_USER}:${APP_DB_PASSWORD}@db:5432/${POSTGRES_DB}
       APP_ENV: ${APP_ENV:-local}
       LOGFIRE_TOKEN: ${LOGFIRE_TOKEN:-}
     ports:
