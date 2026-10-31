@@ -10,9 +10,9 @@ The README includes exact local setup instructions and an architecture diagram. 
 
 The implementation uses FastAPI, PostgreSQL, Docker Compose and GitHub Actions, with checked images published to GHCR and deployment by image digest. The original image scan includes disclosed unresolved findings; these are assessed in docs/security.md rather than represented as a clean image scan.
 
-Final successful workflow run: [insert the final green run URL]
-Final commit: [insert git rev-parse HEAD]
-Published image digest: [insert the final run's Deploy by digest reference]
+Final successful workflow run: [https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41223406454]
+Verified Release Commit: [c14cc52653975120929a87ef1a721a1d1ad63188]
+Published image digest: [ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia@sha256:e9b67a8be731afb41c1cae6b154d8de8e72867fd3142e2e6039323f55f91c0d8]
 
 AI assistance was used substantially and is disclosed in docs/ai-use-disclosure.md. Local runtime demonstrations were executed in WSL2/Docker Desktop using synthetic data.
 

@@ -1,0 +1,2 @@
+PASS: health, readiness, version, real database write/read and invalid input.
+Smoke test leaves one synthetic note in the database; it deletes no data.

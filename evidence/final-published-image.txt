@@ -1,0 +1,1 @@
+ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia@sha256:e9b67a8be731afb41c1cae6b154d8de8e72867fd3142e2e6039323f55f91c0d8
