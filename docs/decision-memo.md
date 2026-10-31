@@ -61,7 +61,6 @@ Prometheus/Grafana or Logfire alerting is in place:
 
 ## What I would improve with more time
 
-Alembic migrations; hash-locked dependencies + Dependabot; a CI step that runs the built image
-against Postgres (container smoke test — it would have caught the v1.0.1 incident before release);
+Alembic migrations; hash-locked dependencies + Dependabot;
 automatic rollback on failed readiness; Prometheus + Grafana with the alerts above; blue/green on the
 VM via two api services behind Caddy for zero-downtime deploys.

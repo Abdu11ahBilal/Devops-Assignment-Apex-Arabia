@@ -1,0 +1,34 @@
+$ curl -s -w ' HTTP %{http_code}' 127.0.0.1:8088/health   # liveness: process is up
+{"status":"ok","version":"d271581"} HTTP 200
+$ curl -s -w ' HTTP %{http_code}' 127.0.0.1:8088/ready    # readiness: DB unreachable
+{"status":"not ready"} HTTP 503
+
+$ docker compose ps
+NAME               STATUS
+apex-tasks-api-1   Up About a minute (unhealthy)
+apex-tasks-db-1    Up 21 minutes (healthy)
+
+$ docker compose logs api | grep ERROR | head -3   # startup + readiness errors
+{"ts": "2026-10-31T18:06:40+0000", "level": "ERROR", "logger": "apex.api", "msg": "database schema initialisation failed", "exc": "Traceback (most recent call last):\n  File \"/srv/app/main.py\", line 28, in lifespan\n    database.init_schema()\n  File \"/srv/app/database.py\", line 23, in init_schema\n    with connect() as conn:\n         ^^^^^^^^^\n  File \"/srv/app/database.py\", line 19, in co
+{"ts": "2026-10-31T18:06:41+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+
+$ docker inspect --format '{{json .Config.Env}}' apex-tasks-api-1 | tr ',' '\n' | grep PGSSLMODE   # root cause: setting baked into the v1.0.1 image
+"PGSSLMODE=require"]
+
+$ git diff v1.0.0 v1.0.1 -- Dockerfile
+diff --git a/Dockerfile b/Dockerfile
+index 3ef55f1..6969807 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -6,7 +6,8 @@ ENV APP_VERSION=${APP_VERSION} \
+     PYTHONDONTWRITEBYTECODE=1 \
+     PYTHONUNBUFFERED=1 \
+     PIP_NO_CACHE_DIR=1 \
+-    PIP_DISABLE_PIP_VERSION_CHECK=1
++    PIP_DISABLE_PIP_VERSION_CHECK=1 \
++    PGSSLMODE=require
+ 
+ WORKDIR /srv
+ 
+
+Logfire: service_name='apex-task-api', GET /ready spans with level=error show the same psycopg exception (export verified in evidence/10).

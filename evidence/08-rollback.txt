@@ -1,0 +1,29 @@
+$ scripts/rollback.sh
+==> Rolling back
+    from: ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api@sha256:1feb40bd282982649ade4f5958408127703ef425a23f7132d038a901e49e2c45
+    to:   v1.0.0 (ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api@sha256:cf0d8a5b1def90cffed861b20ba1efe4a6900383dfc230530b208730554ba9d4)
+==> Pulling ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api@sha256:cf0d8a5b1def90cffed861b20ba1efe4a6900383dfc230530b208730554ba9d4
+==> Deploying v1.0.0 (ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api@sha256:cf0d8a5b1def90cffed861b20ba1efe4a6900383dfc230530b208730554ba9d4)
+ Container apex-tasks-db-1 Running 
+ Container apex-tasks-db-1 Waiting 
+ Container apex-tasks-db-1 Healthy 
+ Container apex-tasks-api-1 Recreate 
+ Container apex-tasks-api-1 Recreated 
+ Container apex-tasks-api-1 Starting 
+ Container apex-tasks-api-1 Started 
+==> Waiting for /ready on port 8088
+==> Healthy: {"status":"ok","version":"a81fbdf"}
+==> Deployed v1.0.0
+==> Tasks in PostgreSQL before: 5, after: 5
+==> Rollback complete, data preserved
+exit=0
+
+$ docker compose ps
+NAME               STATUS
+apex-tasks-api-1   Up 3 seconds (health: starting)
+apex-tasks-db-1    Up 22 minutes (healthy)
+$ curl -s 127.0.0.1:8088/tasks
+[{"id":1,"title":"task 1","done":false,"created_at":"2026-10-31T17:46:51.414440Z"},{"id":2,"title":"task 2","done":false,"created_at":"2026-10-31T17:46:51.588063Z"},{"id":3,"title":"task 3","done":false,"created_at":"2026-10-31T17:46:51.774236Z"},{"id":4,"title":"patch db host","done":false,"created_at":"2026-10-31T18:02:56.102999Z"},{"id":5,"title":"review alerts","done":false,"created_at":"2026-10-31T18:02:56.192153Z"}]
+$ cat .deploy/history
+v1.0.0 ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api@sha256:cf0d8a5b1def90cffed861b20ba1efe4a6900383dfc230530b208730554ba9d4
+v1.0.0 ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api@sha256:cf0d8a5b1def90cffed861b20ba1efe4a6900383dfc230530b208730554ba9d4

@@ -1,0 +1,33 @@
+=== v1.0.1 release run ===
+RUN 41227719624 push v1.0.1 success https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41227719624
+RUN 41227593759 push final-deliverable success https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41227593759
+
+$ scripts/deploy.sh v1.0.1
+==> Pulling ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api:v1.0.1
+==> Deploying v1.0.1 (ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api@sha256:1feb40bd282982649ade4f5958408127703ef425a23f7132d038a901e49e2c45)
+ Container apex-tasks-db-1 Running 
+ Container apex-tasks-db-1 Waiting 
+ Container apex-tasks-db-1 Healthy 
+ Container apex-tasks-api-1 Recreate 
+ Container apex-tasks-api-1 Recreated 
+ Container apex-tasks-api-1 Starting 
+ Container apex-tasks-api-1 Started 
+==> Waiting for /ready on port 8088
+!! v1.0.1 did not become ready within 60s. Recent API logs:
+api-1  | {"ts": "2026-10-31T18:07:17+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:19+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:20+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:21+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:23+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:26+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:28+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:30+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:30+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:32+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:34+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:36+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:38+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:40+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+api-1  | {"ts": "2026-10-31T18:07:40+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.22.0.2\", port 5432 failed: server does not support SSL, but SSL was required"}
+!! Investigate, then restore the last known-good release: scripts/rollback.sh
+exit=1

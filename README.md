@@ -67,13 +67,14 @@ The tests use a real PostgreSQL (`DATABASE_URL` defaults to the container above)
 | Test | `Lint and test` | 6 pytest tests against a PostgreSQL 17 service container; JUnit report uploaded | yes |
 | Build | `Build, scan and publish image` (`needs: test`) | `docker build` with `APP_VERSION=<short sha>` and OCI labels | yes |
 | Non-root | same | `id -u` inside the image must not be `0` | yes |
+| Smoke | same | run the image against a throwaway PostgreSQL; `/ready` must return 200 | yes |
 | Scan | same | Trivy (pinned by digest), fails on fixable HIGH/CRITICAL | yes |
 | Publish | same (push events only) | push `task-api:<commit-sha>` to GHCR | — |
 | Release | `Promote tested image` (tags `v*.*.*`) | `docker buildx imagetools create` retags the commit's existing image to `:v1.x.y` (no rebuild) | fails if the commit never passed CI |
 
 The workflow's default permission is `contents: read`. Only the image and release jobs get `packages: write`. Actions are pinned to commit SHAs.
 
-**Automated checks (9):**
+**Automated checks (10):**
 1. `ruff check .` (lint + bandit security rules)
 2. `test_health_reports_liveness_and_version`
 3. `test_ready_when_database_is_reachable`
@@ -82,7 +83,8 @@ The workflow's default permission is `contents: read`. Only the image and releas
 6. `test_blank_or_missing_title_is_rejected`
 7. `test_metrics_expose_request_and_task_counters`
 8. Container non-root check
-9. Trivy image vulnerability scan
+9. Container smoke test: built image + PostgreSQL, `/ready` must return 200
+10. Trivy image vulnerability scan
 
 ## Release, deploy, rollback
 
@@ -145,9 +147,9 @@ scripts/rollback.sh v1.0.0                   # or roll back to an explicit tag/d
 3. On deploy, the local PostgreSQL has no TLS. `/health` stays 200, but `/ready` returns 503 and `deploy.sh` fails the readiness gate without recording the release as known-good.
 4. `docker compose logs api` and the Logfire `GET /ready` trace both show `server does not support SSL, but SSL was required`.
 5. `scripts/rollback.sh` restores the v1.0.0 digest with the `tasks` row count unchanged.
-6. `v1.0.2` reverts the setting (fix forward).
+6. `v1.0.2` reverts the setting (fix forward) and adds the prevention below.
 
-**Lesson:** add a CI step that runs the built image against PostgreSQL (a container smoke test). That would have caught this before release.
+**Prevention (shipped in v1.0.2):** CI now runs the built image against a throwaway PostgreSQL and requires `/ready` = 200 (step *Smoke test the image against PostgreSQL*). Unit tests run outside the image, which is why v1.0.1 got through.
 
 ## Repository layout
 

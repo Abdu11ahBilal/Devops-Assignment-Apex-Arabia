@@ -82,6 +82,20 @@ jobs:
           uid=$(docker run --rm --entrypoint id "$IMAGE:$GITHUB_SHA" -u)
           echo "container uid: $uid"
           test "$uid" != "0"
+      - name: Smoke test the image against PostgreSQL
+        # Added after the v1.0.1 incident: unit tests run outside the image, so a bad
+        # runtime setting baked into the image (PGSSLMODE=require) passed CI.
+        run: |
+          docker network create smoke
+          docker run -d --name smoke-db --network smoke -e POSTGRES_PASSWORD=smoke postgres:17-alpine
+          docker run -d --name smoke-api --network smoke -p 127.0.0.1:8000:8000 \
+            -e DATABASE_URL=postgresql://postgres:smoke@smoke-db:5432/postgres "$IMAGE:$GITHUB_SHA"
+          for _ in $(seq 1 30); do
+            curl --fail --silent localhost:8000/ready && exit 0
+            sleep 2
+          done
+          docker logs smoke-api
+          exit 1
       - name: Trivy vulnerability scan (fail on fixable HIGH/CRITICAL)
         # Pinned by digest: trivy-action and trivy 0.69.4-0.69.6 were compromised in March 2026.
         run: |
