@@ -9,7 +9,8 @@ flowchart LR
         lint[ruff lint + security rules] --> test[pytest vs PostgreSQL service]
         test --> build[docker build]
         build --> nonroot[non-root check]
-        nonroot --> trivy[Trivy scan HIGH/CRITICAL]
+        nonroot --> smoke[smoke test: image + PostgreSQL, /ready = 200]
+        smoke --> trivy[Trivy scan HIGH/CRITICAL]
         trivy --> push["push ghcr.io/…/task-api:&lt;commit-sha&gt;"]
     end
     tag[git tag v1.x.y] --> promote["release job: retag sha image as v1.x.y (no rebuild)"]
@@ -22,7 +23,7 @@ flowchart LR
 ```
 
 Any failing step stops the chain: no image is pushed for a commit that failed lint, tests, the
-non-root check or the vulnerability scan, and a release tag can only point at an image that exists,
+non-root check, the container smoke test or the vulnerability scan, and a release tag can only point at an image that exists,
 i.e. at a commit that passed CI.
 
 ## Runtime (one host, Docker Compose project `apex-tasks`)
@@ -59,4 +60,4 @@ flowchart LR
 | `app/models.py` | Pydantic request/response models (input validation) |
 | `app/logging_config.py` | JSON log formatter, Logfire setup, FastAPI + psycopg instrumentation |
 | `scripts/deploy.sh` / `scripts/rollback.sh` | Release deployment and recovery |
-| `.github/workflows/ci.yml` | Lint → test → build → non-root check → Trivy → publish; tag → promote |
+| `.github/workflows/ci.yml` | Lint → test → build → non-root check → smoke test → Trivy → publish; tag → promote |

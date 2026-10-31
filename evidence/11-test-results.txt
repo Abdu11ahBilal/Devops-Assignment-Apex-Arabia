@@ -1,0 +1,12 @@
+CI run 41227937462 (v1.0.2 commit), job 'Lint and test' — https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41227937462
+Run ruff check .
+ruff check .
+All checks passed!
+collecting ... collected 6 items
+tests/test_api.py::test_health_reports_liveness_and_version PASSED       [ 16%]
+tests/test_api.py::test_ready_when_database_is_reachable PASSED          [ 33%]
+tests/test_api.py::test_ready_returns_503_when_database_is_unreachable PASSED [ 50%]
+tests/test_api.py::test_created_task_is_persisted_and_listed PASSED      [ 66%]
+tests/test_api.py::test_blank_or_missing_title_is_rejected PASSED        [ 83%]
+tests/test_api.py::test_metrics_expose_request_and_task_counters PASSED  [100%]
+========================= 6 passed, 1 warning in 0.21s =========================

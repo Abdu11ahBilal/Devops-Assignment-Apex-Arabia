@@ -1,0 +1,35 @@
+=== CI runs for v1.0.2 commit ===
+RUN 41228068661 push v1.0.2 success https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41228068661
+RUN 41227937462 push final-deliverable success https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41227937462
+
+$ scripts/deploy.sh v1.0.2
+==> Pulling ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api:v1.0.2
+==> Deploying v1.0.2 (ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api@sha256:66a7fc36ac0bd07203c01d78b4abe3ce3e353434d7ca31c052de8d60c5415c98)
+ Container apex-tasks-db-1 Running 
+ Container apex-tasks-db-1 Waiting 
+ Container apex-tasks-db-1 Healthy 
+ Container apex-tasks-api-1 Recreate 
+ Container apex-tasks-api-1 Recreated 
+ Container apex-tasks-api-1 Starting 
+ Container apex-tasks-api-1 Started 
+==> Waiting for /ready on port 8088
+==> Healthy: {"status":"ok","version":"eabb376"}
+==> Deployed v1.0.2
+exit=0
+
+$ docker compose ps
+NAME               IMAGE                                                                                                                                  STATUS
+apex-tasks-api-1   ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api@sha256:66a7fc36ac0bd07203c01d78b4abe3ce3e353434d7ca31c052de8d60c5415c98   Up 3 seconds (health: starting)
+apex-tasks-db-1    postgres:17-alpine                                                                                                                     Up 25 minutes (healthy)
+$ curl -s 127.0.0.1:8088/tasks | count
+5 tasks
+$ cat .deploy/history
+v1.0.0 ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api@sha256:cf0d8a5b1def90cffed861b20ba1efe4a6900383dfc230530b208730554ba9d4
+v1.0.0 ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api@sha256:cf0d8a5b1def90cffed861b20ba1efe4a6900383dfc230530b208730554ba9d4
+v1.0.2 ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api@sha256:66a7fc36ac0bd07203c01d78b4abe3ce3e353434d7ca31c052de8d60c5415c98
+
+=== Would the new CI smoke test have caught v1.0.1? (CI step commands run locally; host port 8099 because 8000 is busy on this PC) ===
+v1.0.1: /ready OK within 30s = no
+{"ts": "2026-10-31T18:11:45+0000", "level": "ERROR", "logger": "apex.api", "msg": "readiness check failed", "error": "connection failed: connection to server at \"172.23.0.2\", port 5432 failed: server does not support SSL, but SSL was requ
+v1.0.2: /ready OK within 30s = yes
+=> the smoke step (exit 1 when not ready) would have blocked v1.0.1 from being published.

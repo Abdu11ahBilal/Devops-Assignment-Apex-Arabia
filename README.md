@@ -135,11 +135,14 @@ scripts/rollback.sh v1.0.0                   # or roll back to an explicit tag/d
 | [08-rollback.txt](evidence/08-rollback.txt) | Rollback to v1.0.0, data preserved |
 | [09-deploy-v1.0.2.txt](evidence/09-deploy-v1.0.2.txt) | Fix-forward release |
 | [10-logfire-export-check.txt](evidence/10-logfire-export-check.txt) | Logfire ingestion check |
+| [11-test-results.txt](evidence/11-test-results.txt) | Lint + 6 pytest results from the CI log |
 
 **Scenario 1: CI blocks a bad commit.**
 1. A commit adds an intentionally failing test.
 2. The `Lint and test` job fails, so the `Build, scan and publish image` job is skipped and no image is pushed for that SHA. A release tag can't be cut from that SHA either.
 3. A fix commit turns CI green again.
+
+An unplanned real example also happened: commit `6ee503a` had a Dockerfile syntax error; the *Build* step failed and nothing was published ([run 41227484146](https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41227484146)).
 
 **Scenario 2: faulty runtime configuration in a release.**
 1. `v1.0.1` adds `ENV PGSSLMODE=require` to the Dockerfile (a "require TLS to the database" change).
