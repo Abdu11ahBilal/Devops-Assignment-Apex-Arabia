@@ -1,0 +1,26 @@
+Pulling requested image: ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia@sha256:039ea7979dca441ad7d442636bc5576b0e743ff753cd4ae8cd259142c4d397cf
+ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia@sha256:039ea7979dca441ad7d442636bc5576b0e743ff753cd4ae8cd259142c4d397cf: Pulling from abdu11ahbilal/devops-assignment-apex-arabia
+144a2b41839e: Pulling fs layer
+45c0412ae5eb: Pulling fs layer
+42bed4714b43: Pulling fs layer
+8e0a1b84199b: Pulling fs layer
+42bed4714b43: Download complete
+42bed4714b43: Pull complete
+45c0412ae5eb: Download complete
+45c0412ae5eb: Pull complete
+144a2b41839e: Download complete
+8e0a1b84199b: Download complete
+144a2b41839e: Pull complete
+8e0a1b84199b: Pull complete
+Digest: sha256:039ea7979dca441ad7d442636bc5576b0e743ff753cd4ae8cd259142c4d397cf
+Status: Downloaded newer image for ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia@sha256:039ea7979dca441ad7d442636bc5576b0e743ff753cd4ae8cd259142c4d397cf
+ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia@sha256:039ea7979dca441ad7d442636bc5576b0e743ff753cd4ae8cd259142c4d397cf
+Replacing only the API; database and volume are retained.
+ Container apex-operations-api-1 Recreate 
+ Container apex-operations-api-1 Recreated 
+ Container apex-operations-api-1 Starting 
+ Container apex-operations-api-1 Started 
+ Container apex-operations-api-1 Waiting 
+ Container apex-operations-api-1 Healthy 
+Verified database readiness and API version 0.2.0.
+Deployment verified and image selection saved: ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia@sha256:039ea7979dca441ad7d442636bc5576b0e743ff753cd4ae8cd259142c4d397cf

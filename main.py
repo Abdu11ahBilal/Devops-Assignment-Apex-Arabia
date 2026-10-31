@@ -1,16 +1,55 @@
 """Small Operations API for the DevOps assessment."""
 
+import json
+import logging
 import os
+import sys
+import time
+from datetime import UTC, datetime
+from uuid import uuid4
 
 import psycopg
 from dotenv import load_dotenv
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 
 load_dotenv()
 
-app = FastAPI(title="Operations API", version="0.2.0")
+app = FastAPI(title="Operations API", version="0.3.0")
+
+request_logger = logging.getLogger("operations.requests")
+request_logger.setLevel(logging.INFO)
+request_logger.propagate = False
+if not request_logger.handlers:
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(logging.Formatter("%(message)s"))
+    request_logger.addHandler(handler)
+
+
+@app.middleware("http")
+async def log_request(request: Request, call_next):
+    request_id = str(uuid4())
+    started = time.perf_counter()
+    status_code = 500
+    try:
+        response = await call_next(request)
+        status_code = response.status_code
+        response.headers["X-Request-ID"] = request_id
+        return response
+    finally:
+        # Record route templates, never bodies, credentials, headers or query strings.
+        route = getattr(request.scope.get("route"), "path", "unmatched")
+        request_logger.info(json.dumps({
+            "timestamp": datetime.now(UTC).isoformat(),
+            "event": "http_request",
+            "request_id": request_id,
+            "method": request.method,
+            "route": route,
+            "status": status_code,
+            "duration_ms": round((time.perf_counter() - started) * 1000, 2),
+            "version": app.version,
+        }))
 
 
 @app.get("/health")
@@ -96,3 +135,4 @@ def list_notes():
             status_code=503,
             content={"detail": "Database unavailable"},
         )
+
