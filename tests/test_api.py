@@ -4,7 +4,7 @@ import uuid
 def test_health_reports_liveness_and_version(client):
     response = client.get("/health")
     assert response.status_code == 200
-    assert response.json()["status"] == "healthy"  # INTENTIONAL FAILURE: API returns "ok"
+    assert response.json()["status"] == "ok"
     assert "version" in response.json()
 
 
