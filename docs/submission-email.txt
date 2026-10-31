@@ -1,0 +1,22 @@
+Subject: Junior DevOps Engineer Assessment Submission — Abdullah Bilal
+
+Greetings,
+
+Please find my Junior DevOps Engineer assessment submission:
+
+Repository: https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia
+
+The README includes exact local setup instructions and an architecture diagram. The repository also contains the deployment/rollback runbook, automated tests, CI evidence, controlled failure investigation, dependency/image scan reports, decision memo, monitoring/cloud proposals and specific AI-use disclosure.
+
+The implementation uses FastAPI, PostgreSQL, Docker Compose and GitHub Actions, with checked images published to GHCR and deployment by image digest. The original image scan includes disclosed unresolved findings; these are assessed in docs/security.md rather than represented as a clean image scan.
+
+Final successful workflow run: [insert the final green run URL]
+Final commit: [insert git rev-parse HEAD]
+Published image digest: [insert the final run's Deploy by digest reference]
+
+AI assistance was used substantially and is disclosed in docs/ai-use-disclosure.md. Local runtime demonstrations were executed in WSL2/Docker Desktop using synthetic data.
+
+I will schedule the assessment review meeting after submission, allowing time for review of the materials.
+
+Best regards,
+Abdullah Bilal

@@ -8,3 +8,7 @@ __pycache__
 .ruff_cache
 tests
 evidence
+.backups
+*.zip
+.scan
+scan-reports

@@ -1,0 +1,77 @@
+Local configuration ready; credential values were not printed.
+ Container apex-operations-db-1 Recreate 
+ Container apex-operations-db-1 Recreated 
+ Container apex-operations-db-1 Starting 
+ Container apex-operations-db-1 Started 
+ Container apex-operations-db-1 Waiting 
+ Container apex-operations-db-1 Healthy 
+CREATE ROLE
+ALTER ROLE
+GRANT
+GRANT
+GRANT
+GRANT
+ Image apex-operations-api:0.3.0 Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 584B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 764B 0.0s done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159
+#3 DONE 3.1s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 160B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 4.19kB done
+#5 DONE 0.0s
+
+#6 [1/5] FROM docker.io/library/python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159
+#6 resolve docker.io/library/python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159 0.0s done
+#6 DONE 0.0s
+
+#7 [2/5] WORKDIR /app
+#7 CACHED
+
+#8 [3/5] COPY requirements.lock ./
+#8 CACHED
+
+#9 [4/5] RUN python -m pip install -r requirements.lock     && groupadd --gid 10001 app     && useradd --uid 10001 --gid app --no-create-home --shell /usr/sbin/nologin app
+#9 CACHED
+
+#10 [5/5] COPY main.py ./
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers 0.1s done
+#11 exporting manifest sha256:cf71da18164a8cd481ca8e4f9ebe22810bb3d0ffe4d18479e8b7d58170b4d37c 0.0s done
+#11 exporting config sha256:efb51e37b83ad5e998a26b3aa12f574e69d650d70d3cda56558407a1ba262f52 0.0s done
+#11 exporting attestation manifest sha256:6fbc119e26d18f37f12cd3b9dd4314d2496cc7804fd76fbff1041719337f0f14 0.0s done
+#11 exporting manifest list sha256:98eda27709493b41c0d9620817e4e9373d69877a84b69397a702ecaf8db27ea4 0.0s done
+#11 naming to docker.io/library/apex-operations-api:0.3.0 done
+#11 unpacking to docker.io/library/apex-operations-api:0.3.0 0.0s done
+#11 DONE 0.3s
+
+#12 resolving provenance for metadata file
+#12 DONE 0.0s
+ Image apex-operations-api:0.3.0 Built 
+ Container apex-operations-db-1 Running 
+ Container apex-operations-api-1 Recreate 
+ Container apex-operations-api-1 Recreated 
+ Container apex-operations-db-1 Waiting 
+ Container apex-operations-db-1 Healthy 
+ Container apex-operations-api-1 Starting 
+ Container apex-operations-api-1 Started 
+ Container apex-operations-db-1 Waiting 
+ Container apex-operations-api-1 Waiting 
+ Container apex-operations-db-1 Healthy 
+ Container apex-operations-api-1 Healthy 
+PASS: health, readiness, version, real database write/read and invalid input.
+Smoke test leaves one synthetic note in the database; it deletes no data.
+Local configuration ready; credential values were not printed.
+Bootstrap complete: http://127.0.0.1:8001/docs

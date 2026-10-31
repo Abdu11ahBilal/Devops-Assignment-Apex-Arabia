@@ -4,3 +4,8 @@ __pycache__/
 .env
 .pytest_cache/
 .ruff_cache/
+test-results.xml
+.scan/
+scan-reports/
+*.zip
+.backups/

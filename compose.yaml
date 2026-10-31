@@ -2,11 +2,17 @@ name: apex-operations
 
 services:
   db:
-    image: postgres:17
-    env_file: .env
+    image: postgres:17@sha256:31ba9c94a03ada9988f2bb493a22a75eef3a185884533e5cdbcd498ea835b08f
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?Run scripts/bootstrap.sh first}
+      POSTGRES_DB: ${POSTGRES_DB:?Run scripts/bootstrap.sh first}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run scripts/bootstrap.sh first}
+      APP_DB_USER: ${APP_DB_USER:?Run scripts/bootstrap.sh first}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?Run scripts/bootstrap.sh first}
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+      - ./scripts/init-app-role.sh:/docker-entrypoint-initdb.d/002-app-role.sh:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
       interval: 5s
@@ -15,12 +21,14 @@ services:
       start_period: 10s
 
   api:
-    image: ${API_IMAGE:-apex-operations-api:0.1.0}
+    image: ${API_IMAGE:-apex-operations-api:0.3.0}
     build: .
-    env_file: .env
     environment:
       DB_HOST: db
       DB_PORT: "5432"
+      POSTGRES_DB: ${POSTGRES_DB:?Run scripts/bootstrap.sh first}
+      POSTGRES_USER: ${APP_DB_USER:?Run scripts/bootstrap.sh first}
+      POSTGRES_PASSWORD: ${APP_DB_PASSWORD:?Run scripts/bootstrap.sh first}
     ports:
       - "127.0.0.1:8001:8000"
     depends_on:
