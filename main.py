@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field, field_validator
 
 load_dotenv()
 
-app = FastAPI(title="Operations API", version="0.1.0")
+app = FastAPI(title="Operations API", version="0.2.0")
 
 
 @app.get("/health")
