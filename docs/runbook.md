@@ -5,10 +5,11 @@ Run from the repo root (Git Bash on Windows). API: `http://127.0.0.1:8088`.
 ## Deploy
 
 ```bash
-scripts/deploy.sh v1.0.2
+scripts/deploy.sh v1.1.0
 ```
 
-Pulls the image, deploys it by digest, waits up to 60 s for `/ready`. Success is recorded in
+Pulls the image, applies `db/` (schema + API role, idempotent) as the admin, deploys the API by digest
+and waits up to 60 s for `/ready`. Success is recorded in
 `.deploy/history`. On failure it prints the last log lines and exits with an error.
 
 ## Roll back
@@ -33,7 +34,8 @@ Only the API container changes; the database is kept.
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
-| `/health` OK, `/ready` 503 | API can't reach the DB | `docker compose logs api`, check `.env` |
+| `/health` OK, `/ready` 503 | API can't reach the DB, or its role lacks grants | `docker compose logs api`, check `.env`, rerun `deploy.sh` (re-applies grants) |
+| `permission denied for table tasks` | Expected for `DELETE`/DDL: the API role is read + insert only | Run admin changes with `POSTGRES_USER` |
 | `deploy.sh` fails on pull | Version not published (CI failed) | Check the Actions run for that commit |
 | Nothing in Logfire | No/invalid `LOGFIRE_TOKEN` | App still works; use `docker compose logs` |
 | Port 8088 in use | Another app | Change `API_PORT` in `.env` |

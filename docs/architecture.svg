@@ -71,7 +71,8 @@
 <rect x="1055" y="360" width="64" height="64" rx="10" fill="url(#g-db)"/>
 <g transform="translate(1055,360)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="32" cy="19" rx="15" ry="6"/><path d="M17 19v26c0 3.3 6.7 6 15 6s15-2.7 15-6V19M17 32c0 3.3 6.7 6 15 6s15-2.7 15-6"/></g>
 <text x="1087.0" y="442" class="lbl">PostgreSQL 17</text>
-<text x="1087.0" y="458" class="sub">healthcheck pg_isready</text>
+<text x="1087.0" y="458" class="sub">API role: SELECT, INSERT</text>
+<text x="1087.0" y="472" class="sub">no DELETE / DDL</text>
 <rect x="1245" y="360" width="64" height="64" rx="10" fill="url(#g-storage)"/>
 <g transform="translate(1245,360)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="20" width="36" height="24" rx="3"/><circle cx="41" cy="32" r="3.5"/><path d="M20 32h12"/></g>
 <text x="1277.0" y="442" class="lbl">Volume pgdata</text>
@@ -91,23 +92,26 @@
 <text x="647.0" y="558" class="sub">Prometheus format</text>
 <text x="647.0" y="572" class="sub">alerts proposed</text>
 <text x="455" y="268" class="sub" style="font-weight:700">CI gate on every commit — any failure means no image is published</text>
-<rect x="198" y="282" width="78" height="28" rx="14" fill="url(#g-dev)"/>
-<text x="237" y="300.5" class="chip">ruff lint</text>
-<rect x="286" y="282" width="78" height="28" rx="14" fill="url(#g-dev)"/>
-<text x="325" y="300.5" class="chip">6 tests</text>
-<path d="M276 296h8" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
-<rect x="374" y="282" width="78" height="28" rx="14" fill="url(#g-compute)"/>
-<text x="413" y="300.5" class="chip">build</text>
-<path d="M364 296h8" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
-<rect x="462" y="282" width="78" height="28" rx="14" fill="url(#g-sec)"/>
-<text x="501" y="300.5" class="chip">non-root</text>
-<path d="M452 296h8" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
-<rect x="550" y="282" width="78" height="28" rx="14" fill="url(#g-compute)"/>
-<text x="589" y="300.5" class="chip">smoke</text>
-<path d="M540 296h8" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
-<rect x="638" y="282" width="78" height="28" rx="14" fill="url(#g-sec)"/>
-<text x="677" y="300.5" class="chip">Trivy</text>
-<path d="M628 296h8" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="192" y="282" width="68" height="28" rx="14" fill="url(#g-dev)"/>
+<text x="226" y="300.5" class="chip">ruff lint</text>
+<rect x="268" y="282" width="68" height="28" rx="14" fill="url(#g-dev)"/>
+<text x="302" y="300.5" class="chip">6 tests</text>
+<path d="M260 296h6" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="344" y="282" width="68" height="28" rx="14" fill="url(#g-sec)"/>
+<text x="378" y="300.5" class="chip">pip-audit</text>
+<path d="M336 296h6" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="420" y="282" width="68" height="28" rx="14" fill="url(#g-compute)"/>
+<text x="454" y="300.5" class="chip">build</text>
+<path d="M412 296h6" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="496" y="282" width="68" height="28" rx="14" fill="url(#g-sec)"/>
+<text x="530" y="300.5" class="chip">non-root</text>
+<path d="M488 296h6" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="572" y="282" width="68" height="28" rx="14" fill="url(#g-compute)"/>
+<text x="606" y="300.5" class="chip">smoke</text>
+<path d="M564 296h6" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="648" y="282" width="68" height="28" rx="14" fill="url(#g-sec)"/>
+<text x="682" y="300.5" class="chip">Trivy</text>
+<path d="M640 296h6" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
 <text x="1080" y="610" class="sub">Docker healthcheck → /ready  ·  /health = liveness</text>
 <path d="M104 320 L150 320 L150 152 L205 152" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
 <text x="150" y="240" class="edge" text-anchor="middle">git push · git tag</text>
@@ -130,7 +134,7 @@
 <path d="M1282 214 L1282 260 L912 260 L912 358" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
 <text x="1100" y="264" class="edge" text-anchor="middle">HTTP</text>
 <path d="M929 392 L1055 392" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
-<text x="992" y="384" class="edge" text-anchor="middle">SQL</text>
+<text x="992" y="384" class="edge" text-anchor="middle">SQL as apex_app</text>
 <path d="M1119 392 L1245 392" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
 <text x="1182" y="384" class="edge" text-anchor="middle">data</text>
 <path d="M865 392 L770 392 L770 605 L742 605" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>

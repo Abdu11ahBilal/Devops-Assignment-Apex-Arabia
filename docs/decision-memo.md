@@ -12,14 +12,17 @@
 | Build once, tag later | The released image is exactly the tested one | Can only release commits that passed CI |
 | Deploy by digest | Tags can move, digests can't | History is a local file |
 | Manual deploy | A person approves each release | Automatic deploy to a VM is the next step |
+| Schema applied by admin, API uses a restricted role | A bug or injection in the API can't delete data or change tables | Schema changes go through `db/` + `deploy.sh`, not app startup |
 
 ## Security
 
 - **Secrets:** only in `.env`, which git ignores. CI uses GitHub's short-lived token. Logfire is optional.
-- **Least privilege:** CI is read-only by default; only the publishing jobs can write images.
+- **Least privilege:** the API's database role can only read and insert tasks (checked in CI).
+  CI is read-only by default; only the publishing jobs can write images.
   The container runs as a normal user with a read-only filesystem and no extra Linux permissions.
   Ports listen on localhost only.
-- **Supply chain:** GitHub Actions pinned to exact commits. Trivy is pinned to a safe version,
+- **Supply chain:** base images pinned by digest; every Python package pinned in `requirements.lock`
+  and checked by `pip-audit`. GitHub Actions pinned to exact commits. Trivy is pinned to a safe version,
   because Trivy itself was hacked in March 2026 (CVE-2026-33634). Trivy blocks images with
   fixable HIGH/CRITICAL vulnerabilities.
 - **Known gaps:** no API login, no TLS to the local DB, `.env` is plain text.
@@ -43,5 +46,5 @@
 
 ## Next improvements
 
-Alembic migrations · locked dependencies + Dependabot · automatic rollback · Prometheus + Grafana ·
+Alembic migrations · Dependabot for the lockfile and image digests · automatic rollback · Prometheus + Grafana ·
 Release Please for version numbers · zero-downtime (blue/green) deploys.

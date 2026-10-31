@@ -18,3 +18,6 @@ AI assistance was used, as the assessment allows. **Tool:** Claude Code (Anthrop
 - Captured the real command output in `evidence/` (nothing there is hand-written).
 - Drew `docs/architecture.svg` from my reference design and drafted these documents.
 - Looked up the March 2026 Trivy compromise (CVE-2026-33634) to pin a safe Trivy version.
+- Compared this branch with an earlier AI-assisted attempt (`main`, made with a different AI tool) and,
+  at my request, ported its stronger security practices: restricted DB role, digest-pinned base
+  images, full lockfile with `pip-audit`.
