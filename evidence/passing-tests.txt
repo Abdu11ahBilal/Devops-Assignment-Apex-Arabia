@@ -1,0 +1,26 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.4, pytest-9.2.0, pluggy-1.7.0 -- /home/abdul/projects/ApexArabia/Devops-Assignment-Apex-Arabia/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/abdul/projects/ApexArabia/Devops-Assignment-Apex-Arabia
+plugins: anyio-4.15.1
+collecting ... collected 11 items
+
+tests/test_api.py::test_health_does_not_need_database PASSED             [  9%]
+tests/test_api.py::test_version PASSED                                   [ 18%]
+tests/test_api.py::test_unknown_route PASSED                             [ 27%]
+tests/test_api.py::test_invalid_note_is_rejected[payload0] PASSED        [ 36%]
+tests/test_api.py::test_invalid_note_is_rejected[payload1] PASSED        [ 45%]
+tests/test_api.py::test_invalid_note_is_rejected[payload2] PASSED        [ 54%]
+tests/test_api.py::test_invalid_note_is_rejected[payload3] PASSED        [ 63%]
+tests/test_api.py::test_invalid_note_is_rejected[payload4] PASSED        [ 72%]
+tests/test_api.py::test_readiness_reports_database_outage PASSED         [ 81%]
+tests/test_api.py::test_create_note_reports_database_outage PASSED       [ 90%]
+tests/test_api.py::test_list_notes_reports_database_outage PASSED        [100%]
+
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/fastapi/testclient.py:1
+  /home/abdul/projects/ApexArabia/Devops-Assignment-Apex-Arabia/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 11 passed, 1 warning in 0.54s =========================
