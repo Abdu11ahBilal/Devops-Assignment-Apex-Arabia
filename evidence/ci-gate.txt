@@ -1,0 +1,11 @@
+Intentional failure:
+https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41211806441
+Commit: 1115efb
+Result: checks failed; dependent image-build job skipped.
+
+Restored baseline:
+https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41211884720
+Commit: 23cf59c
+Result: checks and dependent image-build job succeeded.
+
+This demonstrates the CI build gate. Publication and deployment are separate stages.

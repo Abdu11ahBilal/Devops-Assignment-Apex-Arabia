@@ -17,10 +17,10 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Check out source
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
       - name: Set up Python
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: "3.12"
           cache: pip
@@ -39,7 +39,7 @@ jobs:
 
       - name: Preserve test report
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: test-results
           path: test-results.xml
@@ -51,14 +51,38 @@ jobs:
     needs: checks
     runs-on: ubuntu-24.04
     timeout-minutes: 15
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Check out source
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
       - name: Build versioned image
-        run: docker build -t "apex-operations-api:${GITHUB_SHA}" .
+        run: |
+          docker build \
+            --label "org.opencontainers.image.source=https://github.com/${GITHUB_REPOSITORY}" \
+            --label "org.opencontainers.image.revision=${GITHUB_SHA}" \
+            -t "apex-operations-api:${GITHUB_SHA}" .
 
       - name: Verify image runs as non-root and imports the API
         run: |
           docker run --rm --entrypoint python "apex-operations-api:${GITHUB_SHA}" \
             -c "import os; import main; assert os.getuid() != 0; print('Non-root UID:', os.getuid()); print('API version:', main.app.version)"
+
+      - name: Publish checked image to GitHub Container Registry
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          image="ghcr.io/${GITHUB_REPOSITORY,,}:${GITHUB_SHA}"
+          printf '%s' "$GH_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+          docker tag "apex-operations-api:${GITHUB_SHA}" "$image"
+          docker push "$image"
+          digest_ref=$(docker image inspect "$image" --format '{{index .RepoDigests 0}}')
+          {
+            echo '### Published image'
+            echo "Commit tag: \`$image\`"
+            echo "Deploy by digest: \`$digest_ref\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
