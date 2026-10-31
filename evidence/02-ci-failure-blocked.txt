@@ -1,0 +1,30 @@
+RUN 41227131220 push final-deliverable failure https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41227131220
+  JOB Lint and test -> failure https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41227131220/job/124613522005
+      Set up job -> success
+      Initialize containers -> success
+      Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 -> success
+      Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 -> success
+      Install dependencies -> success
+      Lint (ruff, incl. bandit security rules) -> success
+      Test against PostgreSQL -> failure
+      Upload test report -> success
+      Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 -> skipped
+      Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 -> success
+      Stop containers -> success
+      Complete job -> success
+  JOB Promote tested image to release tag -> skipped https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41227131220/job/124613523474
+  JOB Build, scan and publish image -> skipped https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41227131220/job/124613652180
+
+--- failing test output (job log excerpt) ---
+All checks passed!
+tests/test_api.py::test_health_reports_liveness_and_version FAILED       [ 16%]
+        assert response.status_code == 200
+>       assert response.json()["status"] == "healthy"  # INTENTIONAL FAILURE: API returns "ok"
+E       AssertionError: assert 'ok' == 'healthy'
+tests/test_api.py:7: AssertionError
+FAILED tests/test_api.py::test_health_reports_liveness_and_version - AssertionError: assert 'ok' == 'healthy'
+==================== 1 failed, 5 passed, 1 warning in 0.37s ====================
+
+--- registry check: no image was published for the failing commit ---
+$ docker manifest inspect ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api:f0b281db3d6db12f9ab39f961d6f9dbd6cf57dfe
+manifest unknown

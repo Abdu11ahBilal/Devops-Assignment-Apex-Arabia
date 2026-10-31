@@ -1,0 +1,5 @@
+$ curl -H 'Authorization: $LOGFIRE_TOKEN' https://logfire-us.pydantic.dev/v1/info
+{"project_name":"devops-apex","project_url":"https://logfire-us.pydantic.dev/abdullahbilal005/devops-apex"}
+
+$ docker compose exec api python  # emit one span via the app's Logfire SDK, urllib3 DEBUG shows the OTLP export result
+DEBUG:urllib3.connectionpool:https://logfire-us.pydantic.dev:443 "POST /v1/traces HTTP/1.1" 200 0

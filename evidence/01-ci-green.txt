@@ -1,0 +1,27 @@
+RUN 41226310343 push final-deliverable success https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41226310343
+  JOB Lint and test -> success https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41226310343/job/124611070255
+      Set up job -> success
+      Initialize containers -> success
+      Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 -> success
+      Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 -> success
+      Install dependencies -> success
+      Lint (ruff, incl. bandit security rules) -> success
+      Test against PostgreSQL -> success
+      Upload test report -> success
+      Post Run actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 -> success
+      Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 -> success
+      Stop containers -> success
+      Complete job -> success
+  JOB Promote tested image to release tag -> skipped https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41226310343/job/124611071567
+  JOB Build, scan and publish image -> success https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41226310343/job/124611199517
+      Set up job -> success
+      Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 -> success
+      Resolve image name -> success
+      Build -> success
+      Verify container runs as non-root -> success
+      Trivy vulnerability scan (fail on fixable HIGH/CRITICAL) -> success
+      Publish to GHCR (immutable commit-SHA tag) -> success
+      Post Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 -> success
+      Complete job -> success
+
+[exited with code 0]
