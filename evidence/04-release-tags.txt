@@ -1,0 +1,17 @@
+=== v1.0.0 -> a81fbdf299cd2f7033cf55c9b5e2d4b8bc5c98f1 ===
+RUN 41227383957 push v1.0.0 success https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41227383957
+RUN 41227224561 push final-deliverable success https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41227224561
+  JOB Lint and test -> success https://github.com/Abdu11ahBilal/Devops-Assignment-Apex-Arabia/actions/runs/41227224561/job/124613797735
+      Set up job -> success
+
+$ docker buildx imagetools inspect ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api:v1.0.0
+Name:      ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api:v1.0.0
+MediaType: application/vnd.docker.distribution.manifest.list.v2+json
+Digest:    sha256:cf0d8a5b1def90cffed861b20ba1efe4a6900383dfc230530b208730554ba9d4
+$ docker buildx imagetools inspect ...:a81fbdf299cd2f7033cf55c9b5e2d4b8bc5c98f1
+Name:      ghcr.io/abdu11ahbilal/devops-assignment-apex-arabia/task-api:a81fbdf299cd2f7033cf55c9b5e2d4b8bc5c98f1
+MediaType: application/vnd.docker.distribution.manifest.v2+json
+Digest:    sha256:ab3edbe9d84c4b15b0f14d04705c96d06404951c8e509ba856278b30a4435109
+
+$ docker buildx imagetools inspect --raw ...:v1.0.0   # the release tag wraps the SAME image manifest CI tested (no rebuild)
+  manifest -> sha256:ab3edbe9d84c4b15b0f14d04705c96d06404951c8e509ba856278b30a4435109
