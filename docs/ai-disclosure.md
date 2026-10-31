@@ -1,14 +1,20 @@
 # AI-use disclosure
 
-**Tool:** Claude Code (Anthropic, Claude Opus 5.5).
+AI assistance was used, as the assessment allows. **Tool:** Claude Code (Anthropic, Claude Opus 5.5).
 
-**I did:** wrote the implementation plan (stack, endpoints, pipeline, failure scenarios, layout),
-chose the scope, gave access to GitHub, Docker and Logfire, and reviewed the code, evidence and docs.
+## My work
 
-**AI did, following that plan:**
-- Wrote the app, tests, Dockerfile, Compose file, CI workflow and deploy/rollback scripts.
-- Ran local checks, pushed the branch and tags, watched CI, and ran both failure demos.
-- Saved the real command output in `evidence/` (nothing there is hand-written).
-- Drafted these docs, and looked up the 2026 Trivy compromise to pick a safe version.
+- Wrote the implementation plan: stack, endpoints, CI stages, release and rollback approach,
+  failure scenarios and repository layout.
+- Designed the architecture and supplied the AWS-style reference the diagram follows.
+- Set the scope and trade-offs, and directed the changes (brevity, versioning model, diagram).
+- Provided access to GitHub, GHCR, Docker and Logfire.
+- Reviewed the code, CI runs, evidence and documents, and can explain and re-run every part.
 
-I can explain and re-run every part live.
+## AI-assisted work, from my plan and under my review
+
+- Generated the application, tests, Dockerfile, Compose file, CI workflow and deploy/rollback scripts.
+- Ran local checks, pushed the branch and release tags, and executed both failure demonstrations.
+- Captured the real command output in `evidence/` (nothing there is hand-written).
+- Drew `docs/architecture.svg` from my reference design and drafted these documents.
+- Looked up the March 2026 Trivy compromise (CVE-2026-33634) to pin a safe Trivy version.

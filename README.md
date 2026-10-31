@@ -3,15 +3,7 @@
 A small FastAPI + PostgreSQL API with a full path from commit to release:
 **test → build → scan → publish → deploy → monitor → roll back.** Runs locally with Docker Compose.
 
-```mermaid
-flowchart LR
-    push[git push] --> ci[CI: lint → tests → build → non-root → smoke → Trivy]
-    ci -->|only if green| ghcr[(GHCR image :commit-sha)]
-    tag[git tag v1.0.2] --> release[release job: same image gets :v1.0.2]
-    release --> ghcr
-    ghcr --> deploy[deploy.sh v1.0.2 → wait for /ready]
-    deploy -->|fails| rollback[rollback.sh → last good version]
-```
+![Apex Task API architecture](docs/architecture.svg)
 
 | | |
 | --- | --- |
@@ -58,7 +50,8 @@ There is **no version number in any file** (`pyproject.toml` has none). Git deci
 - You pick the number by hand when you create the tag. Nothing bumps it automatically.
 - Inside the app, `/health` shows the commit (`"version": "eabb376"`), because the image was built before the tag existed.
 - `deploy.sh` converts the tag to the image's fixed digest (`@sha256:…`). A tag can be moved to another image; a digest can't, so the deployed image is always exactly the one CI tested.
-- If a commit failed CI, it has no image, so tagging it fails to release anything.
+- **No image is pushed** when any CI step fails, or for pull requests (they are built and checked, never published).
+- If a commit has no image, tagging it fails to release anything.
 
 ## Deploy and roll back
 

@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700" width="1400" height="700" font-family="'Amazon Ember', 'Helvetica Neue', Arial, sans-serif">
+<defs>
+<linearGradient id="g-dev" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#2E27AD"/><stop offset="1" stop-color="#527FFF"/></linearGradient>
+<linearGradient id="g-compute" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#C8511B"/><stop offset="1" stop-color="#FF9900"/></linearGradient>
+<linearGradient id="g-db" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#9C1DA6"/><stop offset="1" stop-color="#E255E8"/></linearGradient>
+<linearGradient id="g-storage" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#3F8624"/><stop offset="1" stop-color="#7AA116"/></linearGradient>
+<linearGradient id="g-net" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#4D27AA"/><stop offset="1" stop-color="#A166FF"/></linearGradient>
+<linearGradient id="g-mgmt" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#B0084D"/><stop offset="1" stop-color="#FF4F8B"/></linearGradient>
+<linearGradient id="g-sec" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#BD0816"/><stop offset="1" stop-color="#FF5252"/></linearGradient>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#232F3E"/></marker>
+<style>
+.lbl{font-size:13px;fill:#232F3E;text-anchor:middle;font-weight:600}
+.sub{font-size:11px;fill:#5F6B7A;text-anchor:middle}
+.rgn{font-size:12px;fill:#1F7A8C;font-weight:700;letter-spacing:.6px}
+.rgn2{font-size:11px;fill:#5F6B7A;font-weight:700;letter-spacing:.5px}
+.edge{font-size:11.5px;fill:#414D5C;paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round}
+.chip{font-size:11.5px;fill:#fff;text-anchor:middle;font-weight:700}
+.title{font-size:20px;fill:#232F3E;font-weight:700}
+.note{font-size:12px;fill:#5F6B7A}
+</style></defs>
+<rect width="1400" height="700" fill="#FFFFFF"/>
+<text x="40" y="38" class="title">Apex Task API — delivery and runtime architecture</text>
+<rect x="170" y="70" width="570" height="300" rx="6" fill="#F7FBFC" stroke="#7FB8C6" stroke-width="1.3" stroke-dasharray="5 4"/>
+<rect x="170" y="70" width="26" height="22" rx="3" fill="#7FB8C6"/>
+<path d="M179 87V75h9l-2 3 2 3h-9" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="204" y="86" class="rgn">GITHUB  ·  CI/CD</text>
+<rect x="170" y="400" width="570" height="250" rx="6" fill="#F7FBFC" stroke="#7FB8C6" stroke-width="1.3" stroke-dasharray="5 4"/>
+<rect x="170" y="400" width="26" height="22" rx="3" fill="#7FB8C6"/>
+<path d="M179 417V405h9l-2 3 2 3h-9" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="204" y="416" class="rgn">OBSERVABILITY</text>
+<rect x="800" y="70" width="560" height="580" rx="6" fill="#F7FBFC" stroke="#7FB8C6" stroke-width="1.3" stroke-dasharray="5 4"/>
+<rect x="800" y="70" width="26" height="22" rx="3" fill="#7FB8C6"/>
+<path d="M809 87V75h9l-2 3 2 3h-9" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>
+<text x="834" y="86" class="rgn">DOCKER HOST  ·  local today, small Linux VM next</text>
+<rect x="825" y="300" width="510" height="330" rx="6" fill="#FFFFFF" stroke="#9AA5B1" stroke-width="1.3" stroke-dasharray="5 4"/>
+<text x="837" y="316" class="rgn2">DOCKER COMPOSE PROJECT  apex-tasks</text>
+<rect x="40" y="300" width="64" height="64" rx="10" fill="#E9EBED" stroke="#AAB7B8"/>
+<g transform="translate(40,300)" fill="none" stroke="#232F3E" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="23" r="9"/><path d="M14 52c2-11 10-17 18-17s16 6 18 17"/></g>
+<text x="72.0" y="382" class="lbl">DevOps</text>
+<text x="72.0" y="398" class="lbl">engineer</text>
+<rect x="205" y="120" width="64" height="64" rx="10" fill="url(#g-dev)"/>
+<g transform="translate(205,120)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="17" r="4.5"/><circle cx="22" cy="47" r="4.5"/><circle cx="43" cy="24" r="4.5"/><path d="M22 21.5v21M43 28.5c0 10-8 11-17 15"/></g>
+<text x="237.0" y="202" class="lbl">Git repository</text>
+<text x="237.0" y="218" class="sub">branch final-deliverable</text>
+<rect x="410" y="120" width="64" height="64" rx="10" fill="url(#g-dev)"/>
+<g transform="translate(410,120)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="17"/><path d="M27 23.5l12 8.5-12 8.5z" fill="#fff"/></g>
+<text x="442.0" y="202" class="lbl">GitHub Actions</text>
+<text x="442.0" y="218" class="sub">ci.yml</text>
+<rect x="625" y="120" width="64" height="64" rx="10" fill="url(#g-compute)"/>
+<g transform="translate(625,120)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M32 12l17 8v24l-17 8-17-8V20z"/><path d="M15 20l17 8 17-8M32 28v24"/></g>
+<text x="657.0" y="202" class="lbl">GHCR</text>
+<text x="657.0" y="218" class="sub">task-api:&lt;sha&gt;</text>
+<text x="657.0" y="232" class="sub">task-api:v1.x.y</text>
+<rect x="850" y="120" width="64" height="64" rx="10" fill="url(#g-mgmt)"/>
+<g transform="translate(850,120)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="13" y="16" width="38" height="32" rx="3"/><path d="M20 26l7 6-7 6M31 39h12"/></g>
+<text x="882.0" y="202" class="lbl">deploy.sh</text>
+<text x="882.0" y="218" class="lbl">rollback.sh</text>
+<rect x="1045" y="120" width="64" height="64" rx="10" fill="url(#g-mgmt)"/>
+<g transform="translate(1045,120)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="17"/><path d="M32 22v10l7 5"/></g>
+<text x="1077.0" y="202" class="lbl">.deploy/history</text>
+<text x="1077.0" y="218" class="sub">known-good digests</text>
+<rect x="1250" y="120" width="64" height="64" rx="10" fill="url(#g-net)"/>
+<g transform="translate(1250,120)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="17" y="18" width="30" height="21" rx="2"/><path d="M11 45h42"/></g>
+<text x="1282.0" y="202" class="lbl">API client</text>
+<text x="1282.0" y="218" class="sub">127.0.0.1:8088</text>
+<rect x="865" y="360" width="64" height="64" rx="10" fill="url(#g-compute)"/>
+<g transform="translate(865,360)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M36 11L19 36h12l-4 17 18-26H33z" fill="#fff" stroke="none"/></g>
+<text x="897.0" y="442" class="lbl">API container</text>
+<text x="897.0" y="458" class="sub">FastAPI · uid 10001</text>
+<text x="897.0" y="472" class="sub">read-only · cap_drop ALL</text>
+<rect x="1055" y="360" width="64" height="64" rx="10" fill="url(#g-db)"/>
+<g transform="translate(1055,360)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="32" cy="19" rx="15" ry="6"/><path d="M17 19v26c0 3.3 6.7 6 15 6s15-2.7 15-6V19M17 32c0 3.3 6.7 6 15 6s15-2.7 15-6"/></g>
+<text x="1087.0" y="442" class="lbl">PostgreSQL 17</text>
+<text x="1087.0" y="458" class="sub">healthcheck pg_isready</text>
+<rect x="1245" y="360" width="64" height="64" rx="10" fill="url(#g-storage)"/>
+<g transform="translate(1245,360)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="20" width="36" height="24" rx="3"/><circle cx="41" cy="32" r="3.5"/><path d="M20 32h12"/></g>
+<text x="1277.0" y="442" class="lbl">Volume pgdata</text>
+<text x="1277.0" y="458" class="sub">kept on deploy</text>
+<text x="1277.0" y="472" class="sub">and rollback</text>
+<rect x="215" y="460" width="64" height="64" rx="10" fill="url(#g-mgmt)"/>
+<g transform="translate(215,460)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M32 12c2 8 12 12 12 24a12 12 0 0 1-24 0c0-6 3-9 6-12 0 5 2 7 4 8-1-8 2-14 2-20z"/></g>
+<text x="247.0" y="542" class="lbl">Pydantic Logfire</text>
+<text x="247.0" y="558" class="sub">request + SQL traces</text>
+<rect x="415" y="460" width="64" height="64" rx="10" fill="url(#g-mgmt)"/>
+<g transform="translate(415,460)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12h19l8 8v32H19z"/><path d="M38 12v8h8M24 30h16M24 37h16M24 44h10"/></g>
+<text x="447.0" y="542" class="lbl">JSON logs</text>
+<text x="447.0" y="558" class="sub">docker compose logs</text>
+<rect x="615" y="460" width="64" height="64" rx="10" fill="url(#g-mgmt)"/>
+<g transform="translate(615,460)" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 50h36"/><rect x="18" y="34" width="7" height="14"/><rect x="29" y="24" width="7" height="24"/><rect x="40" y="16" width="7" height="32"/></g>
+<text x="647.0" y="542" class="lbl">/metrics</text>
+<text x="647.0" y="558" class="sub">Prometheus format</text>
+<text x="647.0" y="572" class="sub">alerts proposed</text>
+<text x="455" y="268" class="sub" style="font-weight:700">CI gate on every commit — any failure means no image is published</text>
+<rect x="198" y="282" width="78" height="28" rx="14" fill="url(#g-dev)"/>
+<text x="237" y="300.5" class="chip">ruff lint</text>
+<rect x="286" y="282" width="78" height="28" rx="14" fill="url(#g-dev)"/>
+<text x="325" y="300.5" class="chip">6 tests</text>
+<path d="M276 296h8" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="374" y="282" width="78" height="28" rx="14" fill="url(#g-compute)"/>
+<text x="413" y="300.5" class="chip">build</text>
+<path d="M364 296h8" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="462" y="282" width="78" height="28" rx="14" fill="url(#g-sec)"/>
+<text x="501" y="300.5" class="chip">non-root</text>
+<path d="M452 296h8" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="550" y="282" width="78" height="28" rx="14" fill="url(#g-compute)"/>
+<text x="589" y="300.5" class="chip">smoke</text>
+<path d="M540 296h8" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="638" y="282" width="78" height="28" rx="14" fill="url(#g-sec)"/>
+<text x="677" y="300.5" class="chip">Trivy</text>
+<path d="M628 296h8" stroke="#232F3E" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="1080" y="610" class="sub">Docker healthcheck → /ready  ·  /health = liveness</text>
+<path d="M104 320 L150 320 L150 152 L205 152" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
+<text x="150" y="240" class="edge" text-anchor="middle">git push · git tag</text>
+<path d="M269 152 L410 152" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
+<text x="340" y="144" class="edge" text-anchor="middle">trigger</text>
+<path d="M474 145 L625 145" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
+<text x="550" y="137" class="edge" text-anchor="middle">push :sha</text>
+<path d="M474 165 L625 165" fill="none" stroke="#232F3E" stroke-width="1.7" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="550" y="183" class="edge" text-anchor="middle">tag → same image</text>
+<path d="M689 140 L850 140" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
+<text x="770" y="132" class="edge" text-anchor="middle">pull by digest</text>
+<path d="M850 165 L689 165" fill="none" stroke="#232F3E" stroke-width="1.7" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="770" y="183" class="edge" text-anchor="middle">rollback → older digest</text>
+<path d="M72 300 L72 58 L882 58 L882 118" fill="none" stroke="#232F3E" stroke-width="1.7" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="480" y="62" class="edge" text-anchor="middle">runs deploy.sh / rollback.sh</text>
+<path d="M914 152 L1045 152" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
+<text x="980" y="144" class="edge" text-anchor="middle">record if /ready</text>
+<path d="M882 215 L882 360" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
+<text x="926" y="284" class="edge" text-anchor="start">replace api · wait /ready</text>
+<path d="M1282 214 L1282 260 L912 260 L912 358" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
+<text x="1100" y="264" class="edge" text-anchor="middle">HTTP</text>
+<path d="M929 392 L1055 392" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
+<text x="992" y="384" class="edge" text-anchor="middle">SQL</text>
+<path d="M1119 392 L1245 392" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
+<text x="1182" y="384" class="edge" text-anchor="middle">data</text>
+<path d="M865 392 L770 392 L770 605 L742 605" fill="none" stroke="#232F3E" stroke-width="1.7" marker-end="url(#arrow)"/>
+<text x="732" y="609" class="edge" text-anchor="end">traces · logs · metrics</text>
+<path d="M170 680h36" stroke="#232F3E" stroke-width="1.7"/><text x="214" y="684" class="note">deploy / data flow</text>
+<path d="M400 680h36" stroke="#232F3E" stroke-width="1.7" stroke-dasharray="6 5"/><text x="444" y="684" class="note">release tag / rollback / operator</text>
+</svg>
