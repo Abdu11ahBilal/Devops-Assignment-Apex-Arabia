@@ -3,10 +3,10 @@
 import os
 
 import psycopg
-from pydantic import BaseModel, Field, field_validator
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field, field_validator
 
 load_dotenv()
 
